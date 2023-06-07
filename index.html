@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Mi Proyecto Vue CDN</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <mi-componente></mi-componente>
+    </div>
+
+    <script>
+        Vue.component('mi-componente', {
+            data() {
+                return {
+                    colorTitulo: 'white'
+                };
+            },
+            template: `
+            <div class="mi-contenedor">
+              <h1 class="mi-titulo" :style="{ color: colorTitulo }">Mi componente Vue</h1>
+              <button class="mi-boton" @click="saludar">Haz clic aquí</button>
+              <button class="mi-boton" @click="mostrarHora">Mostrar Hora</button>
+              <button class="mi-boton" @click="cambiarColor">Cambiar Color Titulo</button>
+            </div>
+          `,
+            methods: {
+                saludar() {
+                    alert('¡Hola desde mi componente Vue!');
+                },
+                mostrarHora() {
+                    const fecha = new Date();
+                    const hora = fecha.toLocaleTimeString();
+                    alert('La hora actual es: ' + hora);
+                },
+                cambiarColor() {
+                    // Generar un color aleatorio en formato hexadecimal
+                    const colorHex = '#' + Math.floor(Math.random() * 16777215).toString(16);
+                    this.colorTitulo = colorHex; // Asignar el nuevo color al título
+                }
+            }
+        });
+
+        new Vue({
+            el: '#app'
+        });
+    </script>
+
+    <style>
+        body {
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .mi-contenedor {
+            text-align: center;
+        }
+
+        .mi-boton {
+            background-color: white;
+            color: #333;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .mi-titulo {
+            font-family: Arial, sans-serif;
+            margin-bottom: 20px;
+        }
+    </style>
+</body>
+</html>
